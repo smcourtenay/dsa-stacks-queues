@@ -1,8 +1,5 @@
 "use strict";
 
-// import LinkedList from "./linked-list";
-const LinkedList = require("./linked-list");
-
 /** Node: node for a queue. */
 
 class Node {
@@ -18,9 +15,6 @@ class Node {
  *  remove from the front or add to the back. */
 
 class Queue {
-
-  linkedList = new LinkedList;
-
   first = null;
   last = null;
   size = 0;
@@ -28,8 +22,12 @@ class Queue {
   /** enqueue(val): add new value to end of the queue. Returns undefined. */
 
   enqueue(val) {
-    this.linkedList.push(val)
+    const newNode = new Node(val);
+    if (this.first === null) this.first = newNode;
+    if (this.last !== null) this.last.next = newNode;
 
+    this.last = newNode;
+    this.size++;
     return undefined;
   }
 
@@ -37,19 +35,38 @@ class Queue {
    * and return its value. Should throw an error if the queue is empty. */
 
   dequeue() {
+    if (this.last === null) throw new Error("Error: queue is empty");
 
+    const removeVal = this.first.val;
+
+    if (this.size === 1) {
+      this.first = null;
+      this.last = null;
+      this.size = 0;
+      return removeVal;
+    }
+
+    this.first = this.first.next;
+    this.size--;
+    return removeVal;
   }
 
   /** peek(): return the value of the first node in the queue. */
 
   peek() {
 
+    if (this.last === null) throw new Error("Error: queue is empty");
+
+    const removeVal = this.first.val;
+
+    return removeVal;
   }
 
   /** isEmpty(): return true if the queue is empty, otherwise false */
 
   isEmpty() {
-
+    if (this.last === null) return true;
+    return false;
   }
 }
 
