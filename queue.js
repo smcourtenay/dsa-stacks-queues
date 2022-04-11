@@ -1,3 +1,8 @@
+"use strict";
+
+// import LinkedList from "./linked-list";
+const LinkedList = require("./linked-list");
+
 /** Node: node for a queue. */
 
 class Node {
@@ -13,6 +18,9 @@ class Node {
  *  remove from the front or add to the back. */
 
 class Queue {
+
+  linkedList = new LinkedList;
+
   first = null;
   last = null;
   size = 0;
@@ -20,7 +28,9 @@ class Queue {
   /** enqueue(val): add new value to end of the queue. Returns undefined. */
 
   enqueue(val) {
+    this.linkedList.push(val)
 
+    return undefined;
   }
 
   /** dequeue(): remove the node from the start of the queue
