@@ -1,5 +1,5 @@
 "use strict";
-
+const LinkedList = require('./linked-list');
 /** Node: node for a queue. */
 
 class Node {
@@ -18,15 +18,29 @@ class Queue {
   first = null;
   last = null;
   size = 0;
-
+  _list = new LinkedList();
   /** enqueue(val): add new value to end of the queue. Returns undefined. */
 
-  enqueue(val) {
-    const newNode = new Node(val);
-    if (this.first === null) this.first = newNode;
-    if (this.last !== null) this.last.next = newNode;
+  // enqueue(val) {
+  //   const newNode = new Node(val);
+  //   if (this.first === null) this.first = newNode;
+  //   if (this.last !== null) this.last.next = newNode;
 
-    this.last = newNode;
+  //   this.last = newNode;
+  //   this.size++;
+  //   return undefined;
+  // }
+  enqueue(val) {
+    if(this._list.head === null){
+      this._list.push(val);
+      this.first = this._list.head;
+      this.last = this._list.tail;
+    }
+    if(this._list.head !== null){
+      this._list.push(val);
+      this.last = this._list.tail;
+    }
+    
     this.size++;
     return undefined;
   }
